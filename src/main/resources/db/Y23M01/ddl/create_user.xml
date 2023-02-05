@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <changeSet  author="mandar"  id="y22m08_create_user_v1">
+        <createTable tableName="USER_DETAIL">
+            <column name="NAME"  type="VARCHAR(100)"/>
+            <column  name="ID"  type="INT">
+                <constraints  nullable="false"  primaryKey="true"  unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="mandar" id="y22m08_create_user_v2">
+        <addAutoIncrement catalogName="USER_ID"
+                          columnDataType="INT"
+                          columnName="ID"
+                          incrementBy="1"
+                          schemaName="PUBLIC"
+                          startWith="1"
+                          tableName="USER_DETAIL"/>
+    </changeSet>
+
+    <changeSet author="mandar" id="y22m08_create_user_v3">
+        <addColumn schemaName="PUBLIC" tableName="USER_DETAIL">
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(500)" >
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="mandar" id="y22m08_create_user_v4">
+        <modifyDataType
+             columnName="ID"
+             newDataType="VARCHAR(500)"
+             schemaName="PUBLIC"
+             tableName="USER_DETAIL"/>
+    </changeSet>
+
+    <changeSet author="mandar" id="y22m08_create_user_v5">
+        <addUniqueConstraint
+              columnNames="USERNAME"
+              schemaName="PUBLIC"
+              tableName="USER_DETAIL"
+              validate="true"/>
+    </changeSet>
+
+    <changeSet author="mandar" id="y22m08_create_user_v7">
+        <sql endDelimiter=";">
+            DROP TABLE PUBLIC.USER_DETAIL
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
